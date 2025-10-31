@@ -1,0 +1,307 @@
+<div align="right">
+### يعني ايه بقى STL ?? 
+- دي يصحبي بترمز ل Standard Template Library
+ايوة برضو يعني ايه ؟
+بص خلينا نفهم بالظبط يعني ايه 
+هنبداها من اليمين للشمال 
+1.  اول حاجة Library هي عبارة عن شوية فايلات (عادة Header Files و Source Files) بتنزل وبتتسطب لما تسطب ال compiler بتاع ال C++ 
+	ايوة برضو ال Libraries  دي بيبقى فيها ايه ? 
+	- بص يا صحبي الفايلات دي بيبقى فيها شويه 
+		1. اول حاجة Data Structures
+			`ال Data Structures عبارة عن Container بيشيل شوية داتا و بيوصف شكل الداتا في الميموري و أبسط مثال لل Data Structures هي ال Array 
+			الداتا ممكن تتخزن بأكتر من شكل في الميموري Tree او Array `
+		2. تاني حاجة Algorithms 
+			`عبارة عن شوية Lines of codes ال (process) اللي هتعملهم Apply على ال Data Structure بتاعتك زي ما مثلا انك تدور على element جوة Array الكود اللي هتكتبه هو دا الجورزم`
+2. تاني حاجة Template هي عبارة عن  حاجة generic زي form كل واحد هيملاها بشكل مختلف زي مثلا 
+	`ال form اللي بنملاها واحنا بنقدم على ال ITI. هي نفس ال form بس كل واحد كتب الداتا بتاعته زي اسمك و سنك والجامعة`
+	- طب وهو يقصد ايه بالكلام دا يعني؟
+		`يعني ان ال Data Structures اللي موجودة دي ممكن تخزن Data Types مختلفة يعني مثلا ال Array ممكن يشيل int او float او bool او String ومش بس كدة ال Template بيضحي فانت تقدر تعرف بنفسك Data Type جديدة زي class و تخلي ان ال Data Structure تاخد ال Data Type دا`
+3. تالت حاجة Standard بكل بساطة علشان الناس بتوع ال community بتاعة ال c++ اتفقوا عليها ومراجعينها وان الكود بتاعها اي حد يقدر يستخدمة 
+
+
+---
+### طب ال STLs بيتكون من اية اصلا 
+- هي تتكون من  3 حاجات 
+	1.  اول حاجة Container دي الحاجة اللي ه store فيها ال داتا بتاعتي
+	2. تاني حاجة Iterator دا عبارة عن الحاجة اللي بتربط بين ال container و ال algorithms `ال Iterator هو object بيشتغل زي pointer بيخليك تتحرك جوه الـ container وتوصل لأي element من غير ما تعرف تفاصيل تخزينه`
+	3. تالت حاجة Algorithms دي شوية algorithms اقدر اطبقها على ال container بتاعي 
+طب خلونا نفترض ان ال container بتاعي هو Array فيه شويه elements وانا عاوز اضيف element جديد فهيبقى عندي algorithm اسمه insert وال iterator دا هو مثلا pointer 
+فال iterators هو اللي هيمكنني اني اشتغى على ال container بتاعي بال algorithm 
+
+---
+### طب ليه عملنا STLs اصلا 
+- كان هدفهم انهم يعملوا implement لل Data Structures و ال Algorithms الأكتر استخداما بدل ما كل شويه اعمل implement بنفسي لفانكشن مثلا بتجيب ال size بتاع ال array فليه اكتبها منا استخدمها علطول 
+بأختصال علشان ال Software reuse
+---
+### انواع ال Containers 
+1. ال Sequence Containers ودي معناها ان الداتا متخزنة ورا بعض والداتا ستراكتشرز اللي بتستخدم النوع دا من ال containers 
+	1. ال Array 
+	2. ال Linked List
+	3. ال Vector
+	4. ال Dequeue
+2. ال Associative Containers ودي Containers بتخزن الداتا **مرتبة Automatically** وتوصل ليها بـ **log(n)** زي الـ Tree  `هي بتستخدم Balanced Binary Search Tree (زي Red-Black Tree) علشان كده الوصول O(log n)`
+	1. ال `set`
+	2. ال `multiset`
+	3. ال `map`
+	4. ال `multimap`
+3. ال Unordered Containers ودي مبنية على **Hash Tables** مش Trees ` فبالتالي الوصول average case بتاعه O(1) بس في أسوأ الأحوال ممكن يبقى O(n) لو حصل collision كتير.`
+	1. ال unordered_set
+	2. ال unordered_multiset
+	3. ال unordered_map
+	4. ال unordered_multimap
+4. ال Adaptive Containers	
+	1. ال queue
+	2. ال Stack
+	3. ال priority_queue
+
+طب ليه احنا مكتفيناش ب Data Structure واحدة نعمل بيها كل حاجة زي ال Array؟ 
+- بص مفيش داتا استراكتشر حلوة لكل حاجة كل حاجة ليها مميزات وعيوب 
+`مثلا في ال array لو حبيت ادور على element معين مثلا فأنا مضطر الف على ال array كلهافهل دا افضل حل ؟ `
+`مثلا برضو في ال size بتاع ال array لو انا مش عارف ال size بتاع ال data فأنا كان لازم احجز array كبير علشان اسيف الداتا`
+`و ال time و ال memory برضو في حاجات بتبقى اسرع من ال array في استخدامات معينه`
+
+
+ناخد مثال هنفترض اننا عندنا ال tree دي
+ال tree بتضمنلي ان كل رقم محطوط اللي على يمينه اكبر منه واللي على شماله اصغر منه 
+فلو عاوز ادور على رقم 5 مثلا فأنا هاخد 3 خطوات بالبط علشان الاقيها ولو array كنت هاخد في اسوأ سينارين 8 خطوات O(n)
+فال tree هنا اسرع بكتير  - Searching in Balanced BST (like STL map) → **O(log n)**
+`وده لأن كل خطوة بتقسم الـ tree للنص، فعدد المقارنات بيقل أُسِّيًا بدل ما تمشي على كل عنصر زي الـ array`
+
+![Binary Search Tree](binary_search_tree.webp)
+
+
+
+---
+ال Vector هو عبارة عن Array with extra steps 
+- ال vector عبارة عن dynamic array احنا بنقةل ان ال vector عبارة عن array بس بيتغير ال size بتاعة طب ازاي 
+	`ال vector مش array ال size بتاعه بيتغير هو array static عادي. امال ايه اللي بيحصل بالظبط:
+	اللي بيحصل اني لما باجي اضيف element جديد لل vector لو ال array اللي جوة اتملى فال vector لما يتملي، بيعمل reallocation لـ array جديدة أكبر (عادةً 1.5x أو 2x من الحجم القديم) وينقل فيها كل العناصر.”
+	طبعا دا بيأثر على سرعة ال  insertion لل elements يعني هنا ال insertion مش بنقول عليه O(1) لا دا بيتقال عليه Amortized O(1) علشان هو O(1) بس هييجي في كام مرة وانت يتعمل insert هيقلب معاك O(n) فنخلي بالنا من الموضوع دا`
+- ممكن اكتب ال implementation لل vector بستخدام array عادي 
+
+
+## Vector Common Methods
+
+### Adding Elements
+| Method            | Description                                | Example                      |
+| ----------------- | ------------------------------------------ | ---------------------------- |
+| `push_back(x)`    | Adds element at the end                    | `v.push_back(10);`           |
+| `insert(it, x)`   | Insert before iterator position            | `v.insert(v.begin()+1, 20);` |
+| `emplace_back(x)` | Construct element directly at end (faster) | `v.emplace_back(30);`        |
+
+---
+
+### Removing Elements
+| Method       | Description            | Example               |
+| ------------ | ---------------------- | --------------------- |
+| `pop_back()` | Removes last element   | `v.pop_back();`       |
+| `erase(it)`  | Remove at position     | `v.erase(v.begin());` |
+| `clear()`    | Remove all elements    | `v.clear();`          |
+| `resize(n)`  | Increase/decrease size | `v.resize(5);`        |
+
+---
+
+### Accessing Elements
+| Method    | Description                     | Example              |
+| --------- | ------------------------------- | -------------------- |
+| `v[i]`    | No bounds check                 | `cout << v[0];`      |
+| `at(i)`   | With bounds check               | `cout << v.at(1);`   |
+| `front()` | First element                   | `v.front();`         |
+| `back()`  | Last element                    | `v.back();`          |
+| `data()`  | Get pointer to underlying array | `int* p = v.data();` |
+
+---
+
+### Capacity & Size Info
+| Method            | Description                                |
+| ----------------- | ------------------------------------------ |
+| `size()`          | Number of elements                         |
+| `capacity()`      | Current allocated space                    |
+| `empty()`         | Check if vector is empty                   |
+| `reserve(n)`      | Preallocate memory to avoid reallocation   |
+| `shrink_to_fit()` | Free unused capacity (non-binding request) |
+
+---
+
+###  Iterators
+| Method               | Description                |
+| -------------------- | -------------------------- |
+| `begin()`            | Iterator to first element  |
+| `end()`              | Iterator past last element |
+| `rbegin()`           | Reverse begin              |
+| `rend()`             | Reverse end                |
+| `cbegin()`, `cend()` | Constant iterators         |
+
+
+## **Example: `vector` (Dynamic Array)**
+
+
+```c++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> v;
+
+    // Adding elements
+    v.push_back(10);
+    v.push_back(20);
+    v.push_back(30);
+
+    // Access elements
+    cout << "Vector elements: ";
+    for (int x : v)
+        cout << x << " ";
+
+    cout << "\nFront: " << v.front();
+    cout << "\nBack: " << v.back();
+    cout << "\nSize: " << v.size() << endl;
+
+    // Remove last element
+    v.pop_back();
+
+    cout << "After pop_back(): ";
+    for (int x : v)
+        cout << x << " ";
+
+    return 0;
+}
+
+
+```
+
+
+---
+## `queue` Functions (C++) First In First Out
+
+### Modifiers
+
+| Function               | Description                                          |
+| ---------------------- | ---------------------------------------------------- |
+| `push(const T& value)` | Inserts a new element **at the back** of the queue   |
+| `push(T&& value)`      | Inserts a **rvalue** element (move)                  |
+| `emplace(args...)`     | Constructs an element **in-place** at the back       |
+| `pop()`                | Removes the **front** element (does _not_ return it) |
+| `swap(queue& other)`   | Swaps contents with another queue                    |
+
+---
+
+### Element Access
+
+| Function              | Description                        |
+| --------------------- | ---------------------------------- |
+| `front()`             | Reference to the **first** element |
+| `const front() const` | Const version                      |
+| `back()`              | Reference to the **last** element  |
+| `const back() const`  | Const version                      |
+
+---
+
+### Capacity
+
+| Function  | Description                             |
+| --------- | --------------------------------------- |
+| `empty()` | Returns `true` if queue has no elements |
+| `size()`  | Returns number of elements              |
+
+---
+
+## **Example: `queue` (First In First Out — FIFO)**
+
+```c++
+#include <iostream>
+#include <queue>
+using namespace std;
+
+int main() {
+    queue<int> q;
+
+    // Adding elements
+    q.push(10);
+    q.push(20);
+    q.push(30);
+
+    cout << "Front element: " << q.front() << endl;
+    cout << "Back element: " << q.back() << endl;
+
+    // Removing elements (FIFO)
+    q.pop(); // removes 10
+
+    cout << "After one pop(), front = " << q.front() << endl;
+    cout << "Queue size = " << q.size() << endl;
+
+    return 0;
+}
+
+```
+---
+## `std::stack` Functions (C++) First In Last Out
+
+### Modifiers
+
+| Function               | Description                                      |
+| ---------------------- | ------------------------------------------------ |
+| `push(const T& value)` | Inserts a new element **on top**                 |
+| `push(T&& value)`      | Inserts an **rvalue** (move semantics)           |
+| `emplace(args...)`     | Constructs an element **in-place** on top        |
+| `pop()`                | Removes the top element (does **not** return it) |
+| `swap(stack& other)`   | Swaps contents with another stack                |
+
+---
+
+### Element Access
+
+| Function            | Description                      |
+| ------------------- | -------------------------------- |
+| `top()`             | Reference to the **top element** |
+| `const top() const` | Const version                    |
+
+---
+
+### Capacity
+
+| Function  | Description                      |
+| --------- | -------------------------------- |
+| `empty()` | Returns `true` if stack is empty |
+| `size()`  | Returns number of elements       |
+
+---
+## ** Example: `deque` (Double-Ended Queue)**
+
+```c++
+#include <iostream>
+#include <deque>
+using namespace std;
+
+int main() {
+    deque<int> dq;
+
+    // Add elements from both ends
+    dq.push_back(10);
+    dq.push_front(5);
+    dq.push_back(15);
+
+    cout << "Deque elements: ";
+    for (int x : dq)
+        cout << x << " ";
+
+    cout << "\nFront: " << dq.front();
+    cout << "\nBack: " << dq.back() << endl;
+
+    // Remove from both ends
+    dq.pop_front();
+    dq.pop_back();
+
+    cout << "After popping front & back: ";
+    for (int x : dq)
+        cout << x << " ";
+
+    cout << "\nSize: " << dq.size() << endl;
+
+    return 0;
+}
+
+```
+
+</div>
