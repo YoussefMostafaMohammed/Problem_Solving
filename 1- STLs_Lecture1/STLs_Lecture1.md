@@ -1,4 +1,5 @@
 <div align="right">
+
 ### يعني ايه بقى STL ?? 
 - دي يصحبي بترمز ل Standard Template Library
 ايوة برضو يعني ايه ؟
@@ -70,14 +71,18 @@
 ![Binary Search Tree](binary_search_tree.webp)
 
 
-
 ---
+
 ال Vector هو عبارة عن Array with extra steps 
 - ال vector عبارة عن dynamic array احنا بنقةل ان ال vector عبارة عن array بس بيتغير ال size بتاعة طب ازاي 
 	`ال vector مش array ال size بتاعه بيتغير هو array static عادي. امال ايه اللي بيحصل بالظبط:
 	اللي بيحصل اني لما باجي اضيف element جديد لل vector لو ال array اللي جوة اتملى فال vector لما يتملي، بيعمل reallocation لـ array جديدة أكبر (عادةً 1.5x أو 2x من الحجم القديم) وينقل فيها كل العناصر.”
 	طبعا دا بيأثر على سرعة ال  insertion لل elements يعني هنا ال insertion مش بنقول عليه O(1) لا دا بيتقال عليه Amortized O(1) علشان هو O(1) بس هييجي في كام مرة وانت يتعمل insert هيقلب معاك O(n) فنخلي بالنا من الموضوع دا`
 - ممكن اكتب ال implementation لل vector بستخدام array عادي 
+
+
+
+</div>
 
 
 ## Vector Common Methods
@@ -303,5 +308,3 @@ int main() {
 }
 
 ```
-
-</div>
