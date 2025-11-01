@@ -222,7 +222,47 @@ int main() {
 
 ---
 
-## `queue` Functions (C++) First In First Out
+## `queue` (C++) First In First Out
+
+<div align="right">
+
+# يعني ايه بقى Queue
+
+* الـ **Queue** ببساطة هي **طابور**، نفس فكرة الطابور اللي بنقف فيه في أي مكان.
+  أول واحد دخل الطابور هو أول واحد يخرج.
+  يعني النظام بتاعه اسمه **FIFO — First In First Out**.
+
+---
+
+## طب تعال نفهمها أكتر
+
+* تخيل إن عندك طابور في بنك:
+  أول واحد وصل للشباك هو أول واحد خلص وخرج.
+  نفس الكلام بيحصل جوه الـ `queue` في C++.
+* كل مرة تعمل `push()` بتضيف عنصر **في آخر الطابور**.
+* وكل مرة تعمل `pop()` بتشيل **أول عنصر دخل**.
+
+---
+
+## مكونات الـ Queue
+
+1. **Front** → أول عنصر دخل الطابور (اللي هيخرج الأول).
+2. **Back** → آخر عنصر دخل الطابور (اللي لسه منتظر).
+
+---
+
+## استخدامات الـ Queue
+
+* بتستخدم لما تكون العمليات لازم تحصل **بالترتيب اللي جت بيه**.
+  زي مثلًا:
+
+  * إدارة الطباعة (Printer Queue).
+  * جدولة المهام في أنظمة التشغيل.
+  * الـ BFS (Breadth First Search) في الـ Graphs.
+
+</div>
+
+## Learn more
 
 You can learn more and see queue methods at [queue](https://cplusplus.com/reference/queue/queue/).
   
@@ -257,12 +297,50 @@ int main() {
 
 ```
 ---
-## `std::stack` Functions (C++) First In Last Out
+
+## `std::stack` (C++) First In Last Out
+
+<div align="right">
+
+# يعني ايه بقى Stack
+
+* الـ **Stack** يا صاحبي هو زي كومة طبق فوق بعض.
+  أول طبق تحطه هو **آخر واحد هيتشال**، وده اللي بنسميه مبدأ
+  **LIFO — Last In First Out**.
+
+---
+
+## طب يعني ايه LIFO؟
+
+* ببساطة كده، كل عنصر جديد بتحطه بيتحط **فوق** اللي قبله.
+* لما تيجي تشيل عنصر، بتشيل **اللي فوق** بس، مش اللي في النص.
+
+يعني:
+
+1. تضيف عنصر بـ `push()` → بيتحط فوق الكومة.
+2. تشيل عنصر بـ `pop()` → بيتشال آخر عنصر دخل.
+3. تبص على آخر عنصر من غير ما تشيله بـ `top()`.
+
+---
+
+## استخدامات الـ Stack
+
+الـ Stack بيتستخدم في مواقف كتير في البرمجة زي:
+
+* تنفيذ الـ **Recursion** (الدوال بتستدعي نفسها).
+* **Undo / Redo** في البرامج (زي Ctrl+Z في الـ Word).
+* **تحليل المعادلات الرياضية** (Infix → Postfix).
+* **Stack Memory** اللي بتخزن فيها المتغيرات المؤقتة في الـ RAM.
+
+
+</div>
+
+## Learn more
 
 You can learn more and see stack methods at [stack](https://cplusplus.com/reference/stack/stack/).
 
----
-## ** Example: `deque` (Double-Ended Queue)**
+
+## ** Example: `Stack` First In Last Out**
 
 ```c++
 #include <iostream>
