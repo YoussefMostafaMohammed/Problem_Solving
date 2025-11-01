@@ -73,8 +73,99 @@
 
 ---
 
+<div align="right">
+
+# يعني ايه بقى Vector
+
+* بص يا صحبي خلينا نبدأها ببساطة كده، ال **Vector** هو واحد من أشهر وأهم الـ Containers في الـ STL
+* الناس ساعات بتوصفه إنه **Array بس upgraded**، أو زي ما بيقولوا عليه كده
+  **"Array with superpowers"**
+
+---
+
+## طب هو يعني إيه Array with superpowers؟
+
+* بص، الـ Array العادي ليه شوية قيود كده بايخة:
+
+  1. لازم تحدد الـ size بتاعه من الأول.
+  2. ومينفعش تغير حجمه بعدين.
+  3. ولو خلصت المساحة وعاوز تزود عنصر، خلاص، هتضطر تعمل Array جديدة وتنقل فيها البيانات.
+
+طيب الـ Vector جه حل كل الكلام ده.
+الـ Vector ببساطة **Dynamic Array** يعني حجمه بيكبر لوحده لما تحتاج.
+
+---
+
+## طب هو بيكبر ازاي بقى؟
+
+* لما الـ Vector يتملي وتجي تضيف عنصر جديد، هو من ورا الكواليس بيعمل الآتي:
+
+  1. بيحجز Array جديدة أكبر (عادة الضعف).
+  2. ينقل فيها كل العناصر القديمة.
+  3. ويحط العنصر الجديد كمان.
+
+بس علشان العملية دي مكلفة شوية، بيعملها كل فترة مش كل مرة.
+وده اللي بيخلي عملية الـ **insertion** تبقى **Amortized O(1)** مش O(1) دايمًا.
+
+---
+
+## طيب نقدر نقول عليه ايه ببساطة؟
+
+* تقدر تعتبره كده:
+  **Vector = Array بس ذكي**
+  يعني بيكبر لوحده، بيحسب الـ size، وبيسهل الوصول لأي عنصر عن طريق الـ index زي الـ Array بالظبط.
+
+---
+
+## مميزات الـ Vector
+
+1. بيخزن البيانات ورا بعض في الميموري (Contiguous memory).
+2. تقدر توصل لأي عنصر في **O(1)** زي الـ Array.
+3. حجمه بيتغير أوتوماتيك لما تعمل push_back().
+4. بيشتغل بكفاءة عالية مع الـ Iterators والـ Algorithms بتاعت الـ STL.
+
+---
+
+## عيوبه
+
+1. لما بيحصل reallocation (لما يتملي ويكبر) بياخد وقت لأنه بينسخ كل العناصر.
+2. مش مناسب لو عاوز تضيف أو تحذف في النص كتير — هنا الـ list أو الـ deque أفضل.
+
+---
+
+## دا Implementation بسيط للـ Vector باستخدام Array
+
+```cpp
+class MyVector {
+    int* arr;
+    int size;
+    int capacity;
+public:
+    MyVector() {
+        arr = new int[1];
+        size = 0;
+        capacity = 1;
+    }
+    void push_back(int value) {
+        if (size == capacity) {
+            capacity *= 2;
+            int* newArr = new int[capacity];
+            for (int i = 0; i < size; i++)
+                newArr[i] = arr[i];
+            delete[] arr;
+            arr = newArr;
+        }
+        arr[size++] = value;
+    }
+};
+```
+
+كده ببساطة فهمت الفكرة العامة اللي الـ STL بتعملها جوه الـ vector الحقيقي.
+
+---
+
 ال Vector هو عبارة عن Array with extra steps 
-- ال vector عبارة عن dynamic array احنا بنقةل ان ال vector عبارة عن array بس بيتغير ال size بتاعة طب ازاي 
+- ال vector عبارة عن dynamic array احنا بنقول ان ال vector عبارة عن array بس بيتغير ال size بتاعة طب ازاي 
 	`ال vector مش array ال size بتاعه بيتغير هو array static عادي. امال ايه اللي بيحصل بالظبط:
 	اللي بيحصل اني لما باجي اضيف element جديد لل vector لو ال array اللي جوة اتملى فال vector لما يتملي، بيعمل reallocation لـ array جديدة أكبر (عادةً 1.5x أو 2x من الحجم القديم) وينقل فيها كل العناصر.”
 	طبعا دا بيأثر على سرعة ال  insertion لل elements يعني هنا ال insertion مش بنقول عليه O(1) لا دا بيتقال عليه Amortized O(1) علشان هو O(1) بس هييجي في كام مرة وانت يتعمل insert هيقلب معاك O(n) فنخلي بالنا من الموضوع دا`
@@ -85,61 +176,11 @@
 </div>
 
 
-## Vector Common Methods
+## Learn more
 
-### Adding Elements
-| Method            | Description                                | Example                      |
-| ----------------- | ------------------------------------------ | ---------------------------- |
-| `push_back(x)`    | Adds element at the end                    | `v.push_back(10);`           |
-| `insert(it, x)`   | Insert before iterator position            | `v.insert(v.begin()+1, 20);` |
-| `emplace_back(x)` | Construct element directly at end (faster) | `v.emplace_back(30);`        |
-
----
-
-### Removing Elements
-| Method       | Description            | Example               |
-| ------------ | ---------------------- | --------------------- |
-| `pop_back()` | Removes last element   | `v.pop_back();`       |
-| `erase(it)`  | Remove at position     | `v.erase(v.begin());` |
-| `clear()`    | Remove all elements    | `v.clear();`          |
-| `resize(n)`  | Increase/decrease size | `v.resize(5);`        |
-
----
-
-### Accessing Elements
-| Method    | Description                     | Example              |
-| --------- | ------------------------------- | -------------------- |
-| `v[i]`    | No bounds check                 | `cout << v[0];`      |
-| `at(i)`   | With bounds check               | `cout << v.at(1);`   |
-| `front()` | First element                   | `v.front();`         |
-| `back()`  | Last element                    | `v.back();`          |
-| `data()`  | Get pointer to underlying array | `int* p = v.data();` |
-
----
-
-### Capacity & Size Info
-| Method            | Description                                |
-| ----------------- | ------------------------------------------ |
-| `size()`          | Number of elements                         |
-| `capacity()`      | Current allocated space                    |
-| `empty()`         | Check if vector is empty                   |
-| `reserve(n)`      | Preallocate memory to avoid reallocation   |
-| `shrink_to_fit()` | Free unused capacity (non-binding request) |
-
----
-
-###  Iterators
-| Method               | Description                |
-| -------------------- | -------------------------- |
-| `begin()`            | Iterator to first element  |
-| `end()`              | Iterator past last element |
-| `rbegin()`           | Reverse begin              |
-| `rend()`             | Reverse end                |
-| `cbegin()`, `cend()` | Constant iterators         |
-
+You can learn more and see vector methods at [vector](https://cplusplus.com/reference/vector/vector/).
 
 ## **Example: `vector` (Dynamic Array)**
-
 
 ```c++
 #include <iostream>
@@ -173,43 +214,14 @@ int main() {
     return 0;
 }
 
-
 ```
 
-
 ---
+
 ## `queue` Functions (C++) First In First Out
 
-### Modifiers
-
-| Function               | Description                                          |
-| ---------------------- | ---------------------------------------------------- |
-| `push(const T& value)` | Inserts a new element **at the back** of the queue   |
-| `push(T&& value)`      | Inserts a **rvalue** element (move)                  |
-| `emplace(args...)`     | Constructs an element **in-place** at the back       |
-| `pop()`                | Removes the **front** element (does _not_ return it) |
-| `swap(queue& other)`   | Swaps contents with another queue                    |
-
----
-
-### Element Access
-
-| Function              | Description                        |
-| --------------------- | ---------------------------------- |
-| `front()`             | Reference to the **first** element |
-| `const front() const` | Const version                      |
-| `back()`              | Reference to the **last** element  |
-| `const back() const`  | Const version                      |
-
----
-
-### Capacity
-
-| Function  | Description                             |
-| --------- | --------------------------------------- |
-| `empty()` | Returns `true` if queue has no elements |
-| `size()`  | Returns number of elements              |
-
+You can learn more and see queue methods at [queue](https://cplusplus.com/reference/queue/queue/).
+  
 ---
 
 ## **Example: `queue` (First In First Out — FIFO)**
@@ -243,33 +255,7 @@ int main() {
 ---
 ## `std::stack` Functions (C++) First In Last Out
 
-### Modifiers
-
-| Function               | Description                                      |
-| ---------------------- | ------------------------------------------------ |
-| `push(const T& value)` | Inserts a new element **on top**                 |
-| `push(T&& value)`      | Inserts an **rvalue** (move semantics)           |
-| `emplace(args...)`     | Constructs an element **in-place** on top        |
-| `pop()`                | Removes the top element (does **not** return it) |
-| `swap(stack& other)`   | Swaps contents with another stack                |
-
----
-
-### Element Access
-
-| Function            | Description                      |
-| ------------------- | -------------------------------- |
-| `top()`             | Reference to the **top element** |
-| `const top() const` | Const version                    |
-
----
-
-### Capacity
-
-| Function  | Description                      |
-| --------- | -------------------------------- |
-| `empty()` | Returns `true` if stack is empty |
-| `size()`  | Returns number of elements       |
+You can learn more and see stack methods at [stack](https://cplusplus.com/reference/stack/stack/).
 
 ---
 ## ** Example: `deque` (Double-Ended Queue)**
