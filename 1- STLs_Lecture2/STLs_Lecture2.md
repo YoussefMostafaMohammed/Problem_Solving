@@ -61,42 +61,10 @@ int main(){
 
 ---
 
-### Modifiers
+## Learn more
 
-| Function                      | Description                                                         |
-| ----------------------------- | ------------------------------------------------------------------- |
-| `push(const T& value)`        | Inserts a new element and reorders to maintain the heap property    |
-| `push(T&& value)`             | Inserts an **rvalue** (move semantics)                              |
-| `emplace(args...)`            | Constructs an element **in-place** inside the queue                 |
-| `pop()`                       | Removes the top (highest priority) element (does **not** return it) |
-| `swap(priority_queue& other)` | Swaps contents with another priority queue                          |
+You can learn more and see priority_queue methods at [priority_queue](https://cplusplus.com/reference/queue/priority_queue/).
 
----
-### Element Access
-
-| Function            | Description                                   |
-| ------------------- | --------------------------------------------- |
-| `top()`             | Reference to the **highest priority** element |
-| `const top() const` | Const version of `top()`                      |
-
----
-
-### Capacity
-
-| Function  | Description                      |
-| --------- | -------------------------------- |
-| `empty()` | Returns `true` if queue is empty |
-| `size()`  | Returns number of elements       |
-
----
-
-### Template Parameters
-
-| Parameter   | Description                                                       |
-| ----------- | ----------------------------------------------------------------- |
-| `T`         | Type of the stored elements                                       |
-| `Container` | Underlying container type (default: `std::vector<T>`)             |
-| `Compare`   | Comparison function object (default: `std::less<T>` for max-heap) |
 
 ---
 
@@ -219,72 +187,9 @@ int main(){
 	for(auto num:st)cout<<num; // another way to apply for loob on a set
 }
 ```
+## Learn more
 
-### Modifiers
-
-|Function|Description|
-|---|---|
-|`insert(const T& value)`|Inserts a new element (if not already present)|
-|`insert(T&& value)`|Inserts an **rvalue** element using move semantics|
-|`emplace(args...)`|Constructs an element **in-place** inside the set|
-|`erase(iterator pos)`|Removes the element at the given iterator position|
-|`erase(const T& key)`|Removes the element with the given key (if it exists)|
-|`erase(iterator first, iterator last)`|Removes a **range** of elements|
-|`clear()`|Removes **all** elements from the set|
-|`swap(set& other)`|Swaps contents with another set|
-
----
-
-### Lookup
-
-|Function|Description|
-|---|---|
-|`find(const T& key)`|Returns iterator to the element with the given key, or `end()` if not found|
-|`count(const T& key)`|Returns `1` if the element exists, otherwise `0`|
-|`contains(const T& key)` _(C++20+)_|Returns `true` if element exists|
-|`lower_bound(const T& key)`|Returns iterator to the **first element ≥ key**|
-|`upper_bound(const T& key)`|Returns iterator to the **first element > key**|
-|`equal_range(const T& key)`|Returns a pair of iterators `(lower_bound, upper_bound)`|
-
----
-
-### Iterators
-
-|Function|Description|
-|---|---|
-|`begin()` / `cbegin()`|Iterator to the **first (smallest)** element|
-|`end()` / `cend()`|Iterator to **past-the-last** element|
-|`rbegin()` / `crbegin()`|Reverse iterator to the **largest** element|
-|`rend()` / `crend()`|Reverse iterator to **before-the-first** element|
-
----
-
-### Capacity
-
-|Function|Description|
-|---|---|
-|`empty()`|Returns `true` if set is empty|
-|`size()`|Returns the number of elements|
-|`max_size()`|Returns the maximum number of elements the set can hold|
-
----
-
-### Observers
-
-|Function|Description|
-|---|---|
-|`key_comp()`|Returns the comparison object used to order the keys|
-|`value_comp()`|Returns the same as `key_comp()` (since key = value in set)|
-
----
-
-### Template Parameters
-
-|Parameter|Description|
-|---|---|
-|`T`|Type of the elements (also acts as the key)|
-|`Compare`|Function object for sorting (default: `std::less<T>`)|
-|`Allocator`|Memory allocator (default: `std::allocator<T>`)|
+You can learn more and see Set methods at [Set](https://cplusplus.com/reference/set/set/).
 
 ---
 
@@ -299,84 +204,11 @@ int main(){
 
 </div>
 
-
 ---
 
+## Learn more
 
-### **Basic Declaration**
-
-```c++
-#include <iostream>
-#include <map>
-using namespace std;
-
-int main() {
-    map<int, string> mp;
-
-    mp[1] = "Ahmed";
-    mp[2] = "Youssef";
-    mp[3] = "Omar";
-
-    for (auto p : mp)
-        cout << p.first << " -> " << p.second << endl;
-
-    return 0;
-}
-
-```
-## **Modifiers**
-
-| Function               | Description                                               | Example                  |
-| ---------------------- | --------------------------------------------------------- | ------------------------ |
-| `insert({key, value})` | Inserts a new element (if the key does not already exist) | `mp.insert({4, "Ali"});` |
-| `emplace(key, value)`  | Constructs an element in-place (faster than `insert`)     | `mp.emplace(5, "Sara");` |
-| `erase(key)`           | Removes an element by its key                             | `mp.erase(2);`           |
-| `erase(iterator)`      | Removes the element at the given iterator position        | `mp.erase(mp.begin());`  |
-| `clear()`              | Removes all elements from the map                         | `mp.clear();`            |
-| `swap(otherMap)`       | Exchanges contents with another map                       | `mp.swap(other);`        |
-
----
-
-## **Element Access**
-
-| Function     | Description                                                              | Example             |
-| ------------ | ------------------------------------------------------------------------ | ------------------- |
-| `operator[]` | Access or insert element by key (creates a new element if key not found) | `mp[1] = "Ali";`    |
-| `at(key)`    | Access element by key (throws `out_of_range` if key not found)           | `cout << mp.at(1);` |
-
----
-
-## **Lookup / Search**
-
-| Function           | Description                                              | Example                              |
-| ------------------ | -------------------------------------------------------- | ------------------------------------ |
-| `find(key)`        | Returns iterator to the element, or `end()` if not found | `auto it = mp.find(3);`              |
-| `count(key)`       | Returns `1` if the key exists, `0` otherwise             | `if (mp.count(4)) cout << "exists";` |
-| `lower_bound(key)` | Returns iterator to the first element **≥ key**          | `mp.lower_bound(2);`                 |
-| `upper_bound(key)` | Returns iterator to the first element **> key**          | `mp.upper_bound(2);`                 |
-| `equal_range(key)` | Returns a pair of iterators `[lower_bound, upper_bound)` | `auto range = mp.equal_range(2);`    |
-
----
-
-## **Capacity**
-
-| Function     | Description                                     | Example                            |
-| ------------ | ----------------------------------------------- | ---------------------------------- |
-| `size()`     | Returns the number of elements                  | `cout << mp.size();`               |
-| `empty()`    | Returns `true` if the map is empty              | `if (mp.empty()) cout << "Empty";` |
-| `max_size()` | Returns the maximum number of elements possible | `cout << mp.max_size();`           |
-
----
-
-## **Iterators**
-
-| Function             | Description                             | Example                  |
-| -------------------- | --------------------------------------- | ------------------------ |
-| `begin()`            | Iterator to the first element           | `auto it = mp.begin();`  |
-| `end()`              | Iterator past the last element          | `auto it = mp.end();`    |
-| `rbegin()`           | Reverse iterator to the last element    | `auto it = mp.rbegin();` |
-| `rend()`             | Reverse iterator past the first element | `auto it = mp.rend();`   |
-| `cbegin()`, `cend()` | Constant iterators (read-only access)   | –                        |
+You can learn more and see Map methods at [Map](https://cplusplus.com/reference/map/map/).
 
 ---
 
@@ -432,3 +264,12 @@ int main() {
 
 
 </div>
+
+
+---
+
+## Problem Sheet
+
+You can find the problems sheet here [Problem Sheet](https://vjudge.net/contest/764042).
+
+here is the invitation for the Vjudge Group [invitation](https://vjudge.net/group/psl2?r=Ri0nutenJQdtDwCH9Xat).
